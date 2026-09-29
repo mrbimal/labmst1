@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f2ec">
+  <title>Authentication &amp; Authorization Lab</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="wordmark" href="#top" aria-label="Access Lab home"><span class="mark">A</span> ACCESS LAB</a>
+    <span class="topbar-note">WEB SECURITY · EXPERIMENT 01</span>
+  </header>
+
+  <main id="top">
+    <section class="intro" aria-labelledby="page-title">
+      <p class="eyebrow"><span class="eyebrow-line"></span> AUTHENTICATION / AUTHORIZATION</p>
+      <h1 id="page-title">Who are you?<br><em>What can you do?</em></h1>
+      <p class="intro-copy">Two different questions. One simple demonstration of how identity and access work together.</p>
+    </section>
+
+    <section class="lab" aria-labelledby="lab-title">
+      <div class="lab-heading">
+        <div>
+          <p class="eyebrow">INTERACTIVE DEMO <span class="status-dot"></span></p>
+          <h2 id="lab-title">Role-based login</h2>
+        </div>
+        <span class="lab-index">01 — 02</span>
+      </div>
+
+      <div class="demo-body">
+        <form id="login-form" class="login-form">
+          <label for="username">Username</label>
+          <input id="username" name="username" type="text" autocomplete="username" placeholder="e.g. Alex Morgan" maxlength="40" required>
+          <p class="field-hint">Choose a role to continue.</p>
+          <div class="button-row">
+            <button class="button button-admin" type="submit" data-role="Admin"><span aria-hidden="true">↗</span> Login as Bimal</button>
+            <button class="button button-viewer" type="submit" data-role="Viewer"><span aria-hidden="true">→</span> Login as Viewer</button>
+          </div>
+        </form>
+
+        <section id="session-panel" class="session-panel" aria-live="polite" hidden>
+          <p class="session-kicker"><span class="status-dot"></span> SESSION ACTIVE</p>
+          <h3 id="welcome-message"></h3>
+          <p id="role-summary" class="role-summary"></p>
+          <section class="dashboard" aria-label="Post dashboard">
+            <div class="dashboard-heading">
+              <div>
+                <p class="dashboard-eyebrow">CONTENT WORKSPACE</p>
+                <h4>Post library</h4>
+              </div>
+              <button id="create-post" class="button button-create" type="button"><span aria-hidden="true">+</span> New post</button>
+            </div>
+            <div class="stats-row" aria-label="Post summary">
+              <div class="stat-item"><span>ALL POSTS</span><strong id="post-count">0</strong></div>
+              <div class="stat-item"><span>PUBLISHED</span><strong id="published-count">0</strong></div>
+              <div class="stat-item"><span>DRAFTS</span><strong id="draft-count">0</strong></div>
+            </div>
+            <div id="post-list" class="post-list"></div>
+          </section>
+          <button id="logout-button" class="button button-logout" type="button"><span aria-hidden="true">↩</span> Logout</button>
+        </section>
+        <p id="demo-notice" class="demo-notice" role="status" aria-live="polite"></p>
+      </div>
+      <div class="lab-footer"><span>CLIENT-SIDE DEMO</span><span>NO CREDENTIALS REQUIRED</span></div>
+    </section>
+
+    <section class="notes" aria-labelledby="notes-title">
+      <div class="notes-title">
+        <p class="eyebrow">Q1 · 5 MARKS</p>
+        <h2 id="notes-title">Identity is not permission.</h2>
+      </div>
+      <div class="notes-content">
+        <article class="answer-block">
+          <span class="answer-number">01</span>
+          <div>
+            <h3>Authentication</h3>
+            <p>Verifies <strong>who a user is</strong>, usually by checking credentials such as a password or a sign-in token.</p>
+          </div>
+        </article>
+        <article class="answer-block">
+          <span class="answer-number">02</span>
+          <div>
+            <h3>Authorization</h3>
+            <p>Determines <strong>what an authenticated user may do</strong>. For example, an Admin can delete a post while a Viewer can only read it.</p>
+          </div>
+        </article>
+        <article class="answer-block jwt-block">
+          <span class="answer-number">03</span>
+          <div>
+            <h3>JWT structure</h3>
+            <p>A JSON Web Token has three Base64URL-encoded parts separated by dots:</p>
+            <div class="jwt-parts" aria-label="JWT consists of header, payload, and signature">
+              <span>HEADER</span><b>.</b><span>PAYLOAD</span><b>.</b><span>SIGNATURE</span>
+            </div>
+            <p>The <strong>header</strong> names the token type and signing algorithm; the <strong>payload</strong> contains claims such as subject, role, and expiry; the <strong>signature</strong> lets the receiver detect tampering and verify the token. A signed JWT is not necessarily encrypted, so its payload should not contain secrets.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+    <p class="footnote">For learning only: this client-side role switch demonstrates the interface. Real authorization must be enforced on a trusted server.</p>
+  </main>
+
+  <footer class="page-footer"><span>ACCESS LAB</span><span>SECURITY FUNDAMENTALS</span><span>01 / 01</span></footer>
+</body>
+</html>
